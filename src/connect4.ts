@@ -91,18 +91,38 @@ const checkWin = (grid: Chip[][], chipType: Chip): boolean => {
       }
     }
   }
+
+  // diagonal asc
+  for (let i = 3; i < grid.length; i++) {
+    for (let j = 3; j < grid[0].length; j++) {
+      if (grid[i][j] === chipType && grid[i - 1][j + 1] === chipType && grid[i - 2][j + 2] === chipType && grid[i - 3][j + 3] === chipType) {
+        return true;
+      }
+    }
+  }
+
+  // diagonal desc
+  for (let i = 3; i < grid.length; i++) {
+    for (let j = 3; j < grid[0].length; j++) {
+      if (grid[i][j] === chipType && grid[i - 1][j - 1] === chipType && grid[i - 2][j - 2] === chipType && grid[i - 3][j - 3] === chipType) {
+        return true;
+      }
+    }
+  }
 };
 
 const announceGameStatus = (status: GameStatus) => {
+  let announcementFunction = console.log;
+
   switch (status) {
     case GameStatus.RedWin:
-      console.log('Red won!');
+      announcementFunction('Red won!');
       break;
     case GameStatus.BlueWin:
-      console.log('Blue won!');
+      announcementFunction('Blue won!');
       break;
     case GameStatus.Draw:
-      console.log('Nobody won!');
+      announcementFunction('Nobody won!');
       break;
   }
 }
